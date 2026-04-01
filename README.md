@@ -1,3 +1,5 @@
+![Banner](banner.svg)
+
 # claude-diff-review
 
 Visual diff dashboard showing everything Claude changed — with per-file risk scoring.
