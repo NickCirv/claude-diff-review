@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "start": "node bin/review.js",
-    "test": "node --test src/*.test.js"
+    "test": "node --test"
   },
   "keywords": [
     "claude",
