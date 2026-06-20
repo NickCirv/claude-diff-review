@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "start": "node bin/review.js",
-    "test": "node --test src/*.test.js"
+    "test": "node --test test/smoke.test.js"
   },
   "keywords": [
     "claude",
@@ -34,6 +34,6 @@
     "commander": "^12.1.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20"
   }
 }
