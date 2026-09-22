@@ -1,53 +1,67 @@
-<div align="center">
+![Nicholas Ashkar — claude-diff-review](assets/nicholas-ashkar/banner.png)
 
 # claude-diff-review
 
-**Colour-coded terminal dashboard showing every file Claude touched — with per-file risk scoring**
+Scores Git changes with local rules to help reviewers prioritize files.
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?labelColor=0B0A09)](LICENSE)
-[![Node >=18](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg?labelColor=0B0A09)](https://nodejs.org)
 
-</div>
 
-## Install
 
-```bash
-npx github:NickCirv/claude-diff-review
-```
 
-## Usage
 
-```bash
-# Review all uncommitted changes (staged + unstaged)
-npx github:NickCirv/claude-diff-review
+<a id="usage"></a>
 
-# Review last 3 commits
-npx github:NickCirv/claude-diff-review --since HEAD~3
+<a id="review-all-uncommitted-changes-staged--unstaged"></a>
 
-# Generate a standalone HTML report
-npx github:NickCirv/claude-diff-review --html
+<a id="review-last-3-commits"></a>
 
-# HTML report with a custom filename
-npx github:NickCirv/claude-diff-review --html report.html
-```
+<a id="generate-a-standalone-html-report"></a>
 
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--since <ref>` | Diff against a git ref (`HEAD~3`, a commit SHA, a branch name) | uncommitted changes |
-| `--html [file]` | Write a self-contained dark-theme HTML report | `diff-report.html` |
-| `--no-color` | Disable coloured terminal output | colour enabled |
+<a id="html-report-with-a-custom-filename"></a>
 
 ## What it does
 
-Runs `git diff` against uncommitted changes or a given ref, parses every changed file into per-file records, and scores each one for risk using filename patterns, content patterns, and change size. Results are sorted HIGH → MEDIUM → LOW and rendered as a colour-coded terminal report. Pass `--html` to get a fully self-contained HTML file with expandable per-file diffs, risk-level filtering, and a summary bar — no external dependencies, no API key required.
+- Git-ref comparison.
+- File categorization and sensitive-content hints.
+- Terminal or standalone HTML reports.
 
-**Risk levels at a glance:**
 
-| Level | Triggers |
-|-------|----------|
-| HIGH | Auth/secret/credential filenames · hardcoded credentials in added lines · test files deleted or significantly reduced |
-| MEDIUM | `package.json` / lock files · config files (`.yaml`, `.json`, Dockerfile, tsconfig…) · large deletions (>50 lines) |
-| LOW | New files · documentation changes · standard source edits |
+<a id="install"></a>
 
----
-<sub>Node >=18 · MIT · by <a href="https://github.com/NickCirv">NickCirv</a></sub>
+## Quickstart
+
+Prerequisites: Node.js `>=20` and npm; Git is also used by the implementation. The checkout below pins the source used for this documentation.
+
+```sh
+git clone https://github.com/NickCirv/claude-diff-review.git
+cd claude-diff-review
+git checkout d71941e88440141994e101cb902ca387a4e69214
+npm install
+node bin/review.js --since HEAD~1 --no-color
+```
+
+**Expected behavior (illustrative, not captured):** Prints a risk-oriented summary of the latest commit range when the repository has a parent commit.
+
+Examples are source-inspected, **not runtime-tested**. See the research record for verification gaps.
+
+## Boundaries and data
+
+Scores are heuristics based on file type, changed content and size; they do not prove security or correctness. HTML output includes source diffs and should be handled as project data.
+
+## Development
+
+The manifest defines `npm test` as:
+
+```sh
+node --test test/smoke.test.js
+```
+
+The captured suite is a smoke check, not end-to-end behavior coverage. Examples include “entry is valid JavaScript”. Tests were not run for this documentation revision.
+
+See [implementation and command reference](docs/REFERENCE.md) for the package scripts and inspected interfaces, and [research record](docs/RESEARCH.md) for the pinned source, document decisions and unresolved checks.
+
+## License and contact
+
+See [LICENSE](LICENSE) for the original terms and attribution. Legal text is unchanged.
+
+[Nicholas Ashkar](https://nicholashkar.com/) · [Discuss a project](https://nicholashkar.com/#oxblood-contact)
